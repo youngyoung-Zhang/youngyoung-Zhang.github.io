@@ -10,7 +10,7 @@ branches:
     - blog # build master branch only
 script:
   - hexo clean
-  - hexo g
+  - hexo g -d
 deploy:
   provider: pages
   skip-cleanup: true
