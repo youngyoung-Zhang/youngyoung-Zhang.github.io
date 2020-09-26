@@ -1,28 +1,21 @@
-language: node_js
-node_js: stable
-
 # S: Build Lifecycle
-install:
-  - npm install
-
-script:
-  - hexo clean
-  - hexo generate
-
-after_script:
-  - cd ./public
-  - git init
-  - git config user.name "youngyoung-Zhang"
-  - git config user.email "keng_huo@yeah.net"
-  - git add .
-  - git commit -m "Update Blog"
-  - git push --force --quiet "https://${GITHUB_TOKEN}@${GH_REF}" master:master
 # E: Build LifeCycle
 
+language: node_js
+node_js:
+  - stable
+cache: npm
 branches:
   only:
-    - blog
-    
-env:
- global:
-   - GH_REF: github.com/youngyoung-Zhang/youngyoung-Zhang.github.io
+    - blog # build master branch only
+script:
+  - hexo clean
+  - hexo g
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  on:
+    branch: master
+  local-dir: public
