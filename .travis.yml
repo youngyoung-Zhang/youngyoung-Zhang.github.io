@@ -7,7 +7,7 @@ node_js:
 cache: npm
 branches:
   only:
-    - master # build master branch only
+    - blog # build master branch only
 script:
   - hexo clean
   - hexo g
@@ -15,7 +15,8 @@ deploy:
   provider: pages
   skip-cleanup: true
   github-token: $GITHUB_TOKEN
+  target-branch: master
   keep-history: true
   on:
-    branch: master
+    branch: blog
   local-dir: public
